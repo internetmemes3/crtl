@@ -75,7 +75,7 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
       particles = [];
       
       ctx.fillStyle = 'white';
-      ctx.font = '400 120px pf-fuel-decay, sans-serif';
+      ctx.font = '400 200px pf-fuel-decay, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(text.toUpperCase(), canvas.width/2, canvas.height/2);

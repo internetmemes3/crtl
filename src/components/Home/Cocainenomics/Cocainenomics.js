@@ -5,7 +5,7 @@ import Verify from "../verify";
 
 const Cocainenomics = () => {
     return (
-        <div id="cocainenomics" className="bg-[url('/cartel/bg.JPG')] bg-cover bg-center h-full w-full">
+        <div id="cocainenomics" className="bg-black h-full w-full">
             
            
             
@@ -27,8 +27,8 @@ const Cocainenomics = () => {
                 <Image
                     src="/cartel/basedcartellogo.png"
                     alt="logo"
-                    width={500} 
-                    height={400} 
+                    width={800} 
+                    height={800} 
                     quality={100}
                 />
             </div>
