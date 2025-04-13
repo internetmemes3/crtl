@@ -4,7 +4,6 @@ import { useState, useRef } from 'react'
 import Image from 'next/image'
 
 const Peplonomic = () => {
-  // Video slider data
   const videos = [
     { 
       id: 1, 
