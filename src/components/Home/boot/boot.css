@@ -1,0 +1,146 @@
+:root {
+    --background: #000000;
+    --foreground: #00ff66;
+    --terminal-green: #00ff66;
+    --terminal-dark-green: #008833;
+  }
+
+.boot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+    background-color: var(--background);
+  }
+  
+  .boot-terminal {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 70vh;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+  }
+  
+  .boot-content {
+    padding: 1rem;
+    height: calc(100% - 30px);
+    overflow-y: auto;
+  }
+  
+  .boot-line {
+    color: var(--terminal-green);
+    margin-bottom: 0.5rem;
+    font-family: monospace;
+    white-space: pre-wrap;
+  }
+  
+  .boot-command-line {
+    margin-top: 1rem;
+    color: var(--terminal-green);
+  }
+  
+  .boot-status {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 1rem;
+    color: var(--terminal-green);
+    font-family: monospace;
+  }
+  
+  .status-item {
+    padding: 0.5rem 0;
+  }
+  
+  .security {
+    text-align: right;
+  }
+  
+  .boot-skip {
+    margin-top: 1.5rem;
+  }
+  
+  .skip-button {
+    background-color: transparent;
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-green);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .skip-button:hover {
+    background-color: rgba(0, 255, 102, 0.1);
+  }
+  
+  .fast-forward {
+    margin-right: 0.5rem;
+  }
+  
+  
+  .boot-content::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .boot-content::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  
+  .boot-content::-webkit-scrollbar-thumb {
+    background-color: var(--terminal-dark-green);
+    border-radius: 4px;
+  } 
+
+  .terminal-window {
+    border: 1px solid var(--terminal-green);
+    padding: 1rem;
+    background-color: var(--background);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--terminal-green);
+  }
+
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+    display: inline-block;
+  }
+  
+  .dot-red {
+    background-color: #ff5f56;
+  }
+
+  .dot-yellow {
+    background-color: #ffbd2e;
+  }
+  
+  .dot-green {
+    background-color: #27c93f;
+  }
+
+  .terminal-name {
+    color: var(--terminal-green);
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .command-prompt {
+    color: var(--terminal-green);
+  } 
+
