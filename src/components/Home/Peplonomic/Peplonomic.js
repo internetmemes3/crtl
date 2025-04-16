@@ -81,17 +81,16 @@ const Peplonomic = () => {
           </p>
         </div>
 
-        {/* Video Slider - New Layout */}
         <div className="mb-20">
           <div className="flex flex-col md:flex-row gap-8">
-            {/* Left Content */}
+            
             <div className="w-full md:w-1/2 flex flex-col">
-              {/* Counter */}
+             
               <div className="text-4xl font-bold mb-8">
                 {currentSlideIndex + 1}/{totalSlides}
               </div>
               
-              {/* Text Content */}
+              
               <div className="mb-8 font-mono">
                 <h3 className="text-2xl font-semibold mb-4">
                   {slides[currentSlideIndex].title}
