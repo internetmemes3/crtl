@@ -1,9 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const PowderText = ({ text = "Cartel Over Cabal" }) => {
   const canvasRef = useRef(null);
+  const [needsReset, setNeedsReset] = useState(false);
+  const particlesRef = useRef([]);
+  const initFuncRef = useRef(null);
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,6 +19,8 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
       constructor(x, y) {
         this.x = x;
         this.y = y;
+        this.originX = x;
+        this.originY = y;
         this.size = 2;
         this.density = (Math.random() * 4) + 1;
         this.isActivated = false;
@@ -50,14 +55,6 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         const endX = mouse.x + dirX * lineLength;
         const endY = mouse.y + dirY * lineLength;
         
-        // Store the line coordinates in the mouse object for drawing later
-        mouse.interactionLine = {
-          startX,
-          startY,
-          endX,
-          endY
-        };
-        
         const t = ((this.x - startX) * (endX - startX) + (this.y - startY) * (endY - startY)) / 
                  ((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
         
@@ -72,9 +69,17 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         
         if (distance < 10) { // Line thickness
           this.isActivated = true;
+          setNeedsReset(true); // Set the reset state when particles are disturbed
           this.x += moveX * this.density * 0.5;
           this.y += moveY * this.density * 0.5;
         }
+      }
+
+      // Add a method to reset the particle to its original position
+      reset() {
+        this.x = this.originX;
+        this.y = this.originY;
+        this.isActivated = false;
       }
     }
 
@@ -101,15 +106,20 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
           }
         }
       }
+      
+      // Store particles in the ref for later reset access
+      particlesRef.current = particles;
     }
+
+    // Store init function in ref for reset button
+    initFuncRef.current = init;
 
     const mouse = {
       x: undefined,
       y: undefined,
       prevX: undefined,
       prevY: undefined,
-      pressed: false,
-      interactionLine: null
+      pressed: false
     };
 
     canvas.addEventListener('mousemove', (event) => {
@@ -131,12 +141,10 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
 
     canvas.addEventListener('mouseup', () => {
       mouse.pressed = false;
-      mouse.interactionLine = null; // Clear interaction line when mouse is released
     });
 
     canvas.addEventListener('mouseleave', () => {
       mouse.pressed = false;
-      mouse.interactionLine = null; // Clear interaction line when mouse leaves canvas
     });
 
     function animate() {
@@ -148,26 +156,6 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         particle.draw();
       });
       
-      // Draw the interaction line if it exists
-      if (mouse.pressed && mouse.interactionLine) {
-        const { startX, startY, endX, endY } = mouse.interactionLine;
-        
-        ctx.beginPath();
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)'; // Semi-transparent white line
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        
-        // Draw glowing effect
-        ctx.beginPath();
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)'; // More transparent for the glow
-        ctx.lineWidth = 8;
-        ctx.stroke();
-      }
-      
       requestAnimationFrame(animate);
     }
 
@@ -178,6 +166,7 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
       canvas.width = window.innerWidth;
       canvas.height = 300;
       init();
+      setNeedsReset(false);
     });
 
     return () => {
@@ -189,11 +178,34 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
     };
   }, [text]);
 
+  // Function to handle the reset button click
+  const handleReset = () => {
+    // Reset all particles to their original positions
+    particlesRef.current.forEach(particle => particle.reset());
+    setNeedsReset(false);
+  };
+
   return (
-    <canvas 
-      ref={canvasRef}
-      className="bg-black cursor-pointer font-fuel-decay"
-    />
+    <>
+      
+      <canvas 
+        ref={canvasRef}
+        className="bg-black cursor-pointer font-fuel-decay"
+      />
+        <div className="flex  text-center">
+          <p className="text-gray-400 text-s font-light">^^^ Click and Slide to interact ^^^ </p>
+        </div>
+      {needsReset && (
+        <div className="mt-2 text-center">
+          <button 
+            onClick={handleReset}
+            className="bg-gray-800 text-white px-4 py-1 rounded-full text-xs hover:bg-gray-700 transition-colors"
+          >
+            Reset The Text
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
