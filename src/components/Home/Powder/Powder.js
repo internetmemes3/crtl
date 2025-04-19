@@ -50,6 +50,14 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         const endX = mouse.x + dirX * lineLength;
         const endY = mouse.y + dirY * lineLength;
         
+        // Store the line coordinates in the mouse object for drawing later
+        mouse.interactionLine = {
+          startX,
+          startY,
+          endX,
+          endY
+        };
+        
         const t = ((this.x - startX) * (endX - startX) + (this.y - startY) * (endY - startY)) / 
                  ((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
         
@@ -100,7 +108,8 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
       y: undefined,
       prevX: undefined,
       prevY: undefined,
-      pressed: false
+      pressed: false,
+      interactionLine: null
     };
 
     canvas.addEventListener('mousemove', (event) => {
@@ -122,10 +131,12 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
 
     canvas.addEventListener('mouseup', () => {
       mouse.pressed = false;
+      mouse.interactionLine = null; // Clear interaction line when mouse is released
     });
 
     canvas.addEventListener('mouseleave', () => {
       mouse.pressed = false;
+      mouse.interactionLine = null; // Clear interaction line when mouse leaves canvas
     });
 
     function animate() {
@@ -136,6 +147,26 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         particle.update(mouse);
         particle.draw();
       });
+      
+      // Draw the interaction line if it exists
+      if (mouse.pressed && mouse.interactionLine) {
+        const { startX, startY, endX, endY } = mouse.interactionLine;
+        
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)'; // Semi-transparent white line
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw glowing effect
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)'; // More transparent for the glow
+        ctx.lineWidth = 8;
+        ctx.stroke();
+      }
       
       requestAnimationFrame(animate);
     }
