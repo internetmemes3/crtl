@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import TextReveal from './TextReveal'
-import './TextReveal.css'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -21,14 +20,12 @@ const Peplonomic = () => {
       title: "Peplo Intro",
       description: "text.",
       videoSrc: "/videos/peplodrive.mp4", 
-      poster: "/thumbnail/heromovie.png"
     },
     { 
       id: 2, 
       title: "I am Peplo Escobar",
       description: "text.",
       videoSrc: "/videos/iampeploescobar.mp4", 
-      poster: "/thumbnail/peplo.png"
     },
   ];
 
@@ -71,22 +68,13 @@ const Peplonomic = () => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
 
-  const Section = ({ imageSrc, text, imageLeft = true }) => (
-    <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 py-12 px-4 md:px-16 ${imageLeft ? '' : 'md:flex-row-reverse'}`}>
-      <div className="w-full md:w-1/2">
-        <Image src={imageSrc} alt="Peplo Scene" width={600} height={400} className="rounded-lg object-cover" />
-      </div>
-      <div className="w-full md:w-1/2">
-        <p className="text-black text-lg md:text-xl font-mono">{text}</p>
-      </div>
-    </div>
-  );
-
   return (
     <div id="peplonomic" className="bg-white text-black py-16 font-mono">
       <div className="container mx-auto px-4 md:px-8">
+        <div>
         <TextReveal />
-        
+        </div>
+
         <div className="mb-20">
           <div className="flex flex-col md:flex-row gap-8">
             
@@ -135,7 +123,6 @@ const Peplonomic = () => {
                 <video
                   ref={videoRef}
                   src={slides[currentSlideIndex].videoSrc}
-                  poster={slides[currentSlideIndex].poster}
                   className="w-full h-auto object-cover"
                   controls
                   controlsList="nodownload"
