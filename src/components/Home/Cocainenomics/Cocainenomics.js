@@ -19,11 +19,12 @@ const Cocainenomics = () => {
                     className="w-full h-auto object-top"
                     quality={100}
                 />
+                 <Verify />
             </div>
 
-            <Verify />
+           
 
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center mt-20">
                 <Image
                     src="/cartel/basedcartellogo.png"
                     alt="logo"

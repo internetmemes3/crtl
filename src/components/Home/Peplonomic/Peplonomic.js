@@ -1,9 +1,20 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
+import TextReveal from './TextReveal'
+import './TextReveal.css'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const Peplonomic = () => {
+  // Register ScrollTrigger with GSAP
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+  }, []);
+
   const slides = [
     { 
       id: 1, 
@@ -74,13 +85,8 @@ const Peplonomic = () => {
   return (
     <div id="peplonomic" className="bg-white text-black py-16 font-mono">
       <div className="container mx-auto px-4 md:px-8">
-      <div className="flex flex-col md:flex-row items-start justify-between mb-16 px-4 md:px-16">
-          <h1 className="text-6xl md:text-8xl font-bold mb-4 md:mb-0 font-normal font-fuel-decay">$CRTL</h1>
-          <p className="text-lg md:text-xl font-mono ml-4">
-            Bridging together the Peplo universe, memes, characters and lore with the utility of AI and DeFi to bring you a whole new crypto sector: MemeFAi
-          </p>
-        </div>
-
+        <TextReveal />
+        
         <div className="mb-20">
           <div className="flex flex-col md:flex-row gap-8">
             
@@ -143,30 +149,6 @@ const Peplonomic = () => {
             </div>
           </div>
         </div>
-       
-        <Section 
-          imageSrc="/peplo-scene.png" 
-          text="Peplo's rise from the trenches is a story for the ages. The cartel kingpin went from moving grams to kilomemes."
-          imageLeft={true} 
-        />
-         <Section 
-          imageSrc="/peplo-scene.png" 
-          text="Peplo's rise from the trenches is a story for the ages. The cartel kingpin went from moving grams to kilomemes."
-          imageLeft={false} 
-        />
-         <Section 
-          imageSrc="/peplo-scene.png" 
-          text="Peplo's rise from the trenches is a story for the ages. The cartel kingpin went from moving grams to kilomemes."
-          imageLeft={true} 
-        />
-
-        
-        <div className="text-center my-16 md:my-24 px-4">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4">What is MemeFAi?</h2>
-          
-        </div>
-
-        
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 px-4 md:px-16">
             <div className="w-full md:w-1/3">
                 <h2 className="text-5xl font-bold mb-4">FAQ</h2>
