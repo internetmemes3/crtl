@@ -5,6 +5,7 @@ import Arcade from "./Arcade";
 import Logo from "./Logo";
 import Footer from "./Footer";
 import Powder from "./Powder";
+import Based from "./Based";
 
 
-export { Hero, Peplonomic, Cocainenomics, Arcade, Logo, Footer, Powder };
+export { Hero, Peplonomic, Cocainenomics, Arcade, Logo, Footer, Powder, Based };

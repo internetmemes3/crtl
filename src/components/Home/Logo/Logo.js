@@ -72,17 +72,17 @@ const Logo = () => {
                             rel="noopener noreferrer"
                             className="logo-item mx-8 transform hover:scale-110 transition duration-300"
                         >
-                            <Image
+<Image
                                 src={logo.src}
                                 alt={logo.alt}
                                 width={logo.width} 
                                 height={logo.height}
-                                className="object-contain" 
-                            />
-                        </a>
+        className="object-contain" 
+      />
+      </a>
                     ))}
                 </div>
-            </div>
+      </div>
             
             <style jsx>{`
                 .logo-carousel-container {

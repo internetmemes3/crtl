@@ -1,4 +1,4 @@
-import { Hero, Peplonomic, Footer, Cocainenomics, Arcade, Logo } from "../components/Home";
+import { Hero, Peplonomic, Footer, Cocainenomics, Based, Logo } from "../components/Home";
 import { Navbar } from "@/components";
 
 
@@ -15,7 +15,7 @@ const Home = () => {
       
       <Peplonomic />
       <Cocainenomics />
-      <Arcade />
+      <Based />
     </main>
     </>
   );

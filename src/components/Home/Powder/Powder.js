@@ -98,11 +98,14 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      for (let y = 0; y < canvas.height; y += 1) {
-        for (let x = 0; x < canvas.width; x += 1) {
+      const samplingRate = 2; // Adjust this value (e.g., 2, 3, 4)
+      const particleSize = 3; // Adjust if needed based on samplingRate
+
+      for (let y = 0; y < canvas.height; y += samplingRate) {
+        for (let x = 0; x < canvas.width; x += samplingRate) {
           const index = (Math.floor(y) * canvas.width + Math.floor(x)) * 4;
-          if (data[index + 3] > 128) {
-            particles.push(new Particle(x, y));
+          if (data[index + 3] > 128) { // Check alpha channel
+            particles.push(new Particle(x, y /*, potential size argument */));
           }
         }
       }
@@ -163,7 +166,7 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
     animate();
 
     window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
+      canvas.width = 500;
       canvas.height = 300;
       init();
       setNeedsReset(false);
@@ -193,7 +196,7 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         className="bg-black cursor-pointer font-fuel-decay"
       />
         <div className="flex  text-center">
-          <p className="text-gray-400 text-s font-light">^^^ Click and Slide to interact ^^^ </p>
+          <p className="text-gray-400 text-s font-light">Click and Slide to interact</p>
         </div>
       {needsReset && (
         <div className="mt-2 text-center">

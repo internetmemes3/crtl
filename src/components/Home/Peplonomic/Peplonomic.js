@@ -17,13 +17,11 @@ const Peplonomic = () => {
   const slides = [
     { 
       id: 1, 
-      title: "Peplo Intro",
       description: "text.",
       videoSrc: "/videos/peplodrive.mp4", 
     },
     { 
       id: 2, 
-      title: "I am Peplo Escobar",
       description: "text.",
       videoSrc: "/videos/iampeploescobar.mp4", 
     },
@@ -68,8 +66,8 @@ const Peplonomic = () => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
 
-  return (
-    <div id="peplonomic" className="bg-white text-black py-16 font-mono">
+    return (
+    <div id="peplonomic" className="bg-white text-black py-16">
       <div className="container mx-auto px-4 md:px-8">
         <div>
         <TextReveal />
@@ -86,9 +84,6 @@ const Peplonomic = () => {
               
               
               <div className="mb-8 font-mono">
-                <h3 className="text-2xl font-semibold mb-4">
-                  {slides[currentSlideIndex].title}
-                </h3>
                 <p className="text-lg leading-relaxed">
                   {slides[currentSlideIndex].description}
                 </p>
@@ -136,32 +131,41 @@ const Peplonomic = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16 px-4 md:px-16">
+        {/* FAQ Section */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16 px-4 md:px-16 mt-16 md:mt-24 font-sans">
             <div className="w-full md:w-1/3">
-                <h2 className="text-5xl font-bold mb-4">FAQ</h2>
-                <p className="text-lg">FIND QUICK, STRAIGHTFORWARD ANSWERS TO YOUR MOST COMMON QUESTIONS</p>
+                {/* FAQ Title with Black Background */}
+                <div className="inline-block bg-black text-white px-4 py-2 mb-4">
+                  <h2 className="text-4xl font-bold">FAQ</h2>
+                </div>
+                <p className="text-lg font-medium">FIND QUICK, STRAIGHTFORWARD ANSWERS TO YOUR MOST COMMON QUESTIONS</p>
             </div>
             <div className="w-full md:w-2/3">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="border-b border-gray-700 py-4">
+                  <div 
+                    key={index} 
+                    className={`border-b border-black transition-colors duration-300 ease-in-out ${openFAQ === index ? 'bg-black text-white' : 'bg-white text-black'}`}
+                  >
                     <button
                       onClick={() => toggleFAQ(index)}
-                      className="flex justify-between items-center w-full text-left text-xl font-medium"
+                      className="flex justify-between items-center w-full text-left py-4"
                     >
-                      <span>{faq.question}</span>
-                      <span>{openFAQ === index ? '-' : '+'}</span>
-                    </button>
-                    {openFAQ === index && (
-                      <div className={`mt-3 text-gray-600 p-4 rounded ${openFAQ === index ? 'bg-black text-white' : ''}`}>
-                        {faq.answer}
-                         <button 
-                            onClick={() => toggleFAQ(index)} 
-                            className="float-right text-xl font-bold"
-                          >
-                            x
-                         </button>
+                      <span className="text-lg font-medium px-4">{faq.question}</span>
+                      {/* Icon Container */}
+                      <div className={`flex items-center justify-center h-8 w-8 border border-black ${openFAQ === index ? 'bg-white' : 'bg-black'} mr-4`}>
+                        <span className={`text-xl font-bold ${openFAQ === index ? 'text-black' : 'text-white'}`}>
+                          {openFAQ === index ? '×' : '+'}
+                        </span>
                       </div>
-                    )}
+                    </button>
+                    {/* Answer Section - Using GSAP or Framer Motion for smooth animation is recommended for production */}
+                    <div 
+                      className={`overflow-hidden transition-max-height duration-500 ease-in-out ${openFAQ === index ? 'max-h-screen' : 'max-h-0'}`}
+                    >
+                      <div className="pb-4 px-4 text-base">
+                        {faq.answer}
+                      </div>
+                    </div>
                   </div>
                 ))}
             </div>

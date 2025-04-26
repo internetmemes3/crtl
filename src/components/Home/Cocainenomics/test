@@ -1,0 +1,145 @@
+'use client'
+
+import Image from 'next/image'
+import Verify from "../verify";
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Arcade from '../Arcade';
+
+const Cocainenomics = () => {
+    const sectionRef = useRef(null);
+    const dividerRef = useRef(null);
+    const verifyRef = useRef(null);
+    
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            if (sectionRef.current && dividerRef.current && verifyRef.current) {
+                const divider = dividerRef.current;
+                const section = sectionRef.current;
+                const verify = verifyRef.current;
+                
+                // Set initial position - Verify component starts hidden below
+                gsap.set(verify, { 
+                    y: '0%', // Start below the viewport
+                });
+                
+                // Create the scroll animation
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "bottom top", // Start when the top of the section hits the bottom of the viewport
+                        end: "bottom bottom", // End when the top of the section is 20% from the top of the viewport
+                        scrub: true, // Smooth scrubbing tied to scroll position
+                        pin: divider, // Pin the divider at the top
+                        pinSpacing: false,
+                        markers: false, // Set to true for debugging
+                    }
+                });
+                
+                // Animate the verify component upward (revealing it from bottom)
+                tl.to(verify, {
+                    y: '100%', // Move to its natural position
+                    ease: "power1.inOut",
+                });
+                
+                return () => {
+                    // Clean up
+                    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+                };
+            }
+        }
+    }, []);
+    
+    return (
+        <div id="cocainenomics" ref={sectionRef} className="bg-black h-full w-full">
+            
+                {/* Divider - This will be pinned */}
+                <div ref={dividerRef} className="relative w-full z-10">
+                    <Image
+                        src="/divider/powerwhitedividerbottom.png"
+                        alt="Divider"
+                        width={0} 
+                        height={0} 
+                        sizes="100vw" 
+                        className="w-full h-auto object-top"
+                        quality={100}
+                    />
+                </div>
+                <div className="relative">
+                {/* Verify component - This will be revealed */}
+                <div ref={verifyRef} className="relative w-full z-0 overflow-hidden">
+                    <Verify />
+                </div>
+            </div>
+
+            <div className="flex items-center justify-center mt-20">
+                <Image
+                    src="/cartel/basedcartellogo.png"
+                    alt="logo"
+                    width={800} 
+                    height={800} 
+                    quality={100}
+                />
+            </div>
+
+            <div className="flex items-center justify-center p-10">
+                <div>
+                    <Image
+                        src="/cartel/NFTs.png"
+                        alt="NFTs"
+                        width={900} 
+                        height={800}
+                        unoptimized 
+                    />
+                </div>
+            </div>
+
+            <div className="flex items-center justify-center px-4">
+                <p className="text-white text-center text-1xl font-bold">
+                    Join the unstoppable movement of the cartel, where the best onchain innovators <br/> 
+                    collaborate to bring you the dankest killomemes across base.
+                    <br/>
+                    A union for the people, a bet on the base takeover.<br/><br/>
+                    Now available on secondary markets.
+                </p>
+            </div>
+            
+            <div className="flex justify-center space-x-4 sm:space-x-6 items-center py-10">
+                <a href="https://magiceden.us/collections/base/0x8059ed675c394c7cb0a8302b8572e2792bacb73e" title="Visit Magic Eden" target="_blank" className="transform hover:scale-110 transition duration-300">
+                    <Image
+                        src="/logo/magicedenlogo.png"
+                        alt="Magic Eden"
+                        width={100}
+                        height={100}
+                    />
+                </a>
+                <a href="" title="Visit " target="_blank" className="transform hover:scale-110 transition duration-300">
+                    <Image
+                        src="/logo/opensealogo.png"
+                        alt="X"
+                        width={100}
+                        height={100}
+                    />
+                </a>
+            </div>
+            <div className="relative w-full ">
+                <Image
+                    src="/divider/powerwhitedivider.png"
+                    alt="Divider"
+                    width={0} 
+                    height={0} 
+                    sizes="100vw" 
+                    className="w-full h-auto object-top"
+                    quality={100}
+                />
+            <Arcade />
+            </div>
+        </div>
+    );
+}
+
+export default Cocainenomics;

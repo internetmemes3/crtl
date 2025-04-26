@@ -20,23 +20,28 @@ const Arcade = () => {
   );
 
   return (
-    <div id="arcade" className="bg-white py-16 px-4 md:px-8 font-mono">
+    <div id="arcade" className="bg-white py-16 px-4 md:px-8 font-mono text-black">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-16">
           <Section title="SOCIALS" items={socials} />
           <Section title="INFO" items={info} />
           <Section title="LINKS" items={links} />
+          <div className="text-xs leading-relaxed">
+            <p>
+              <span className="bg-black text-white py-0.5 px-1 mr-1">$CRTL</span> 
+              is a meme coin built for entertainment purposes any likeness of characters, events or people is in parody. This project is not to be confused as an investment vehicle, and participants should engage at their own risk.
+            </p>
+          </div>
         </div>
-
         <div className="text-center overflow-hidden">
 
-           <h1 
-             className="font-fuel-decay font-normal text-black tracking-tighter uppercase" 
-             style={{ fontSize: '17vw', lineHeight: '0.8' }}
-           >
-             $CRTL
-           </h1>
-        </div>
+<h1 
+  className="font-fuel-decay font-normal text-black tracking-tighter uppercase" 
+  style={{ fontSize: '17vw', lineHeight: '0.8' }}
+>
+  $CRTL
+</h1>
+</div>
       </div>
     </div>
   );
