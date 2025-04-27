@@ -63,8 +63,6 @@ const Hero = () => {
       <div ref={powderRef} className="flex flex-col items-center justify-center pt-40 pb-16 w-full">
         <PowderText text="Cartel Over Cabal" />
       </div>
-      
-      {/* Divider Section - This will scroll normally */}
       <div ref={dividerRef} className="relative w-full">
         <Image
           src="/divider/powerwhitedivider.png"

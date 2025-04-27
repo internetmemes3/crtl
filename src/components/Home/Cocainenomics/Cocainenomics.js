@@ -5,6 +5,7 @@ import Verify from "../verify";
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from './Cocainenomics.module.css';
 
 const Cocainenomics = () => {
     const sectionRef = useRef(null);
@@ -22,7 +23,7 @@ const Cocainenomics = () => {
                 
                 // Set initial position - Verify component starts hidden below
                 gsap.set(verify, { 
-                    y: '-20%', // Start below the viewport
+                    y: '-17%', // Start below the viewport
                 });
                 
                 // Create the scroll animation
@@ -54,7 +55,7 @@ const Cocainenomics = () => {
                 </div>
                 <div className="relative">
                 {/* Verify component - This will be revealed */}
-                <div ref={verifyRef} className="relative w-full z-0 overflow-hidden">
+                <div ref={verifyRef} className={`${styles.fadeBottom} relative w-full z-0 overflow-hidden`}>
                     <Verify />
                 </div>
             </div>

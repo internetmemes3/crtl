@@ -22,6 +22,21 @@ const Based = () => {
             // markers: process.env.NODE_ENV === 'development' // Uncomment for debugging
         });
 
+        // Add fade-out animation for section one as user scrolls
+        const fadeOutTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#one",
+                start: "top top", // Start at the top of the viewport
+                endTrigger: "#two",
+                end: "top 20%", // End animation when top of #two is 20% from top of viewport
+                scrub: true, // Smooth animation that follows scroll position
+                // markers: process.env.NODE_ENV === 'development' // Uncomment for debugging
+            }
+        });
+        
+        // Fade out section one content
+        fadeOutTl.to("#one", { opacity: 0, ease: "power2.inOut" });
+
         // Cleanup function for ScrollTrigger instances
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
