@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image'
 import Arcade from '../Arcade';
 import { gsap } from 'gsap';
@@ -12,12 +12,38 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const Based = () => {
     const containerRef = useRef(null);
     const sectionsRef = useRef(null);
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    // Function to handle resize and set window width
+    const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+    };
+    
+    useEffect(() => {
+        // Set initial window width
+        if (typeof window !== 'undefined') {
+            setWindowWidth(window.innerWidth);
+            window.addEventListener('resize', handleResize);
+        }
+        
+        return () => {
+            if (typeof window !== 'undefined') {
+                window.removeEventListener('resize', handleResize);
+            }
+        };
+    }, []);
 
     useEffect(() => {
+        // Only set up animations when windowWidth is available
+        if (!windowWidth) return;
+        
         const container = containerRef.current;
         const sections = sectionsRef.current;
         
         if (!container || !sections) return;
+        
+        // Kill any existing ScrollTriggers to prevent duplicate animations
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         
         // Set up the horizontal scroll animation
         let horizontalScrollTween = gsap.to(sections, {
@@ -35,7 +61,6 @@ const Based = () => {
             }
         });
         
-       
         ScrollTrigger.create({
             trigger: "#one",
             start: "top top",
@@ -63,51 +88,55 @@ const Based = () => {
         // Cleanup function
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-            horizontalScrollTween.kill();
+            if (horizontalScrollTween) horizontalScrollTween.kill();
         };
-    }, []);
+    }, [windowWidth]); // Re-run when window width changes
 
     return (
         <div className="bg-black h-full w-full">
-            <div className="flex items-center justify-center mt-20">
+            {/* Logo Section - Responsive */}
+            <div className="flex items-center justify-center pt-10 sm:pt-16 md:pt-20 px-4">
                 <Image
                     src="/cartel/basedcartellogo.png"
                     alt="logo"
                     width={800}
                     height={800}
+                    className="w-[70%] sm:w-[60%] md:w-[50%] max-w-[800px]"
                     quality={100}
                 />
             </div>
             
-            {/* Horizontal scrolling container */}
-            <div ref={containerRef} className="overflow-hidden h-screen relative">
+            {/* Horizontal scrolling container - Fixed height changed to responsive */}
+            <div ref={containerRef} className="overflow-hidden h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen relative">
                 <div ref={sectionsRef} className="flex w-[200vw] h-full">
                     {/* First panel - original content */}
                     <section className="w-screen h-full flex flex-col items-center justify-center px-4">
-                        <div className="flex items-center justify-center p-10">
-                            <div>
+                        <div className="flex items-center justify-center p-4 sm:p-6 md:p-10">
+                            <div className="w-full max-w-[90vw] sm:max-w-[80vw] md:max-w-[70vw]">
                                 <Image
                                     src="/cartel/NFTs.png"
                                     alt="NFTs"
                                     width={900}
                                     height={800}
+                                    className="w-full h-auto object-contain"
                                     unoptimized
                                 />
                             </div>
                         </div>
 
                         <div className="flex items-center justify-center px-4">
-                            <p className="text-white text-center text-1xl font-bold">
-                                Join the unstoppable movement of the cartel, where the best onchain innovators <br/>
+                            <p className="text-white text-center text-sm sm:text-base md:text-lg lg:text-xl font-bold max-w-[90vw] sm:max-w-[80vw] md:max-w-[70vw]">
+                                Join the unstoppable movement of the cartel, where the best onchain innovators
+                                {windowWidth > 640 && <br />} {/* Conditional line break based on screen size */}
                                 collaborate to bring you the dankest killomemes across base.
-                                <br/>
-                                A union for the people, a bet on the base takeover.<br/><br/>
+                                <br />
+                                A union for the people, a bet on the base takeover.<br /><br />
                                 Now available on secondary markets.
                             </p>
                         </div>
 
-                        <div className="flex justify-center space-x-4 sm:space-x-6 items-center py-10">
-                            <a href="https://magiceden.us/collections/base/0x8059ed675c394c7cb0a8302b8572e2792bacb73e" title="Visit Magic Eden" target="_blank" className="transform hover:scale-110 transition duration-300">
+                        <div className="flex mb-10 justify-center space-x-3 sm:space-x-4 md:space-x-6 items-center py-6 sm:py-8 md:py-10">
+                        <a href="https://magiceden.us/collections/base/0x8059ed675c394c7cb0a8302b8572e2792bacb73e" title="Visit Magic Eden" target="_blank" className="transform hover:scale-110 transition duration-300">
                                 <Image
                                     src="/logo/magicedenlogo.png"
                                     alt="Magic Eden"
@@ -128,12 +157,12 @@ const Based = () => {
                     
                     {/* Second panel - full screen image that will be pinned during vertical scroll */}
                     <section id="one" className="panel w-screen h-full flex items-center justify-center">
-                        <div className="relative w-[70%] h-[70%]">
+                        <div className="relative w-[85%] h-[85%] sm:w-[80%] sm:h-[80%] md:w-[75%] md:h-[75%] lg:w-[70%] lg:h-[70%]">
                             <Image
                                 src="/cartel/sicardiosnft.png"
                                 alt="Sicardios NFT"
                                 fill
-                                className="object-cover"
+                                className="object-contain sm:object-cover"
                                 quality={100}
                             />
                         </div>
@@ -152,8 +181,8 @@ const Based = () => {
                     className="w-full h-auto object-top"
                     quality={100}
                 />
-                    <Arcade />
-                </section>
+                <Arcade />
+            </section>
             
         </div>
     );

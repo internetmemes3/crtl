@@ -7,13 +7,41 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
   const [needsReset, setNeedsReset] = useState(false);
   const particlesRef = useRef([]);
   const initFuncRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  
+  // Calculate responsive dimensions based on window size
+  const calculateDimensions = () => {
+    if (typeof window === 'undefined') return { width: 0, height: 0 };
+    
+    const width = window.innerWidth;
+    // Scale height based on screen width
+    const height = Math.min(Math.max(width * 0.2, 150), 350);
+    
+    return { width, height };
+  };
+  
+  // Calculate responsive font size based on screen width
+  const calculateFontSize = () => {
+    if (typeof window === 'undefined') return 200;
+    
+    const width = window.innerWidth;
+    // Base font size on screen width
+    if (width < 480) return 60; // Mobile
+    if (width < 768) return 100; // Small tablets
+    if (width < 1024) return 150; // Tablets
+    return 200; // Desktops
+  };
   
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     
-    canvas.width = window.innerWidth;
-    canvas.height = 300;
+    // Set initial dimensions
+    const newDimensions = calculateDimensions();
+    setDimensions(newDimensions);
+    
+    canvas.width = newDimensions.width;
+    canvas.height = newDimensions.height;
     
     class Particle {
       constructor(x, y) {
@@ -88,7 +116,8 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
       particles = [];
       
       ctx.fillStyle = 'white';
-      ctx.font = '400 200px pf-fuel-decay, sans-serif';
+      const fontSize = calculateFontSize();
+      ctx.font = `400 ${fontSize}px pf-fuel-decay, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(text.toUpperCase(), canvas.width/2, canvas.height/2);
@@ -165,15 +194,22 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
     init();
     animate();
 
-    window.addEventListener('resize', () => {
-      canvas.width = 500;
-      canvas.height = 300;
+    // Properly handle window resize
+    const handleResize = () => {
+      const newDimensions = calculateDimensions();
+      setDimensions(newDimensions);
+      
+      canvas.width = newDimensions.width;
+      canvas.height = newDimensions.height;
+      
       init();
       setNeedsReset(false);
-    });
+    };
+
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', () => {});
+      window.removeEventListener('resize', handleResize);
       canvas.removeEventListener('mousemove', () => {});
       canvas.removeEventListener('mousedown', () => {});
       canvas.removeEventListener('mouseup', () => {});

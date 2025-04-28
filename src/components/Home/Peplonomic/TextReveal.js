@@ -60,8 +60,8 @@ const TextReveal = () => {
     <div className="text-reveal-wrapper">
       <main className="text-reveal-main">
         <section className="reveal-section">
-          <div className="text-center mb-8">
-            <h1 className="text-6xl md:text-8xl font-normal font-fuel-decay text-black">$CRTL</h1>
+          <div className="text-center mb-4 sm:mb-6 md:mb-8">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-normal font-fuel-decay text-black">$CRTL</h1>
           <p>
             <span>
               Bridging together the Peplo universe, memes, characters and lore with the utility of AI and DeFi to bring you a whole new crypto sector: MemeFAi

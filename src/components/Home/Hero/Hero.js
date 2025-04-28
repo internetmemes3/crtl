@@ -3,12 +3,32 @@ import PowderText from '../Powder';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Hero = () => {
   const containerRef = useRef(null);
   const powderRef = useRef(null);
   const dividerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Function to check if device is mobile
+  const checkMobile = () => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  };
+  
+  useEffect(() => {
+    // Set initial mobile status
+    setIsMobile(checkMobile());
+    
+    // Update mobile status on resize
+    const handleResize = () => {
+      setIsMobile(checkMobile());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -18,6 +38,9 @@ const Hero = () => {
         const container = containerRef.current;
         const powderSection = powderRef.current;
         const divider = dividerRef.current;
+        
+        // Kill existing ScrollTriggers to prevent duplicates on re-renders
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -55,12 +78,17 @@ const Hero = () => {
         };
       }
     }
-  }, []);
+  }, [isMobile]); // Re-run when mobile state changes
 
   return (
     <div ref={containerRef} className="relative bg-black">
       {/* Powder Text Section - This will be pinned */}
-      <div ref={powderRef} className="flex flex-col items-center justify-center pt-40 pb-16 w-full">
+      <div 
+        ref={powderRef} 
+        className={`flex flex-col items-center justify-center w-full ${
+          isMobile ? 'pt-20 pb-8' : 'pt-40 pb-16'
+        }`}
+      >
         <PowderText text="Cartel Over Cabal" />
       </div>
       <div ref={dividerRef} className="relative w-full">
