@@ -128,7 +128,7 @@ const Based = () => {
                     
                     {/* Second panel - full screen image that will be pinned during vertical scroll */}
                     <section id="one" className="panel w-screen h-full flex items-center justify-center">
-                        <div className="relative w-full h-full">
+                        <div className="relative w-[70%] h-[70%]">
                             <Image
                                 src="/cartel/sicardiosnft.png"
                                 alt="Sicardios NFT"
