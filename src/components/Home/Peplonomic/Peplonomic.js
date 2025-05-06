@@ -130,7 +130,7 @@ const Peplonomic = () => {
             </div>
             
             {/* Right Content - Video */}
-            <div className="w-full lg:w-1/2 relative order-1 lg:order-2">
+            <div className="w-full lg:w-1/2 relative order-1 lg:order-2 mb-20">
               <div className="rounded-lg overflow-hidden aspect-w-16 aspect-h-9"> {/* Use aspect ratio */} 
                 <video
                   ref={videoRef}
