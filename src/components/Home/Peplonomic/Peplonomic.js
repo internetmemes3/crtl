@@ -129,20 +129,20 @@ const Peplonomic = () => {
               </div>
             </div>
             
-            {/* Right Content - Video */}
+
             <div className="w-full lg:w-1/2 relative order-1 lg:order-2 mb-20">
-              <div className="rounded-lg overflow-hidden aspect-w-16 aspect-h-9"> {/* Use aspect ratio */} 
+              <div className="rounded-lg overflow-hidden aspect-w-16 aspect-h-9"> 
                 <video
                   ref={videoRef}
-                  key={slides[currentSlideIndex].videoSrc} // Add key to force re-render on source change
+                  key={slides[currentSlideIndex].videoSrc} 
                   src={slides[currentSlideIndex].videoSrc} 
-                  className="w-full h-full object-cover" // Ensure video covers the container
+                  className="w-full h-full object-cover" 
                   controls
-                  controlsList="nodownload" // Consider removing for better UX if download needed
+                  controlsList="nodownload" 
                   preload="metadata"
-                  playsInline // Important for mobile
-                  muted // Often required for autoplay
-                  autoPlay // Attempt autoplay
+                  playsInline 
+                  muted 
+                  autoPlay 
                   onError={(e) => console.error("Video Error:", e)}
                 >
                   Your browser does not support the video tag.
