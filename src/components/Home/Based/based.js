@@ -207,23 +207,14 @@ const Based = () => {
                     </p>
                 </div>
 
-                        <div className="flex justify-center space-x-3 sm:space-x-4 md:space-x-6 items-center py-6 sm:py-8 md:py-10">
+                        <div className="flex justify-center space-x-3 sm:space-x-4 md:space-x-6 items-center mb-20 py-6 sm:py-8 md:py-10">
                     <a href="https://magiceden.us/collections/base/0x8059ed675c394c7cb0a8302b8572e2792bacb73e" title="Visit Magic Eden" target="_blank" className="transform hover:scale-110 transition duration-300">
                         <Image
                             src="/logo/magicedenlogo.png"
                             alt="Magic Eden"
                             width={100}
                             height={100}
-                                    className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] md:w-[100px] md:h-[100px]"
-                        />
-                    </a>
-                    <a href="" title="Visit " target="_blank" className="transform hover:scale-110 transition duration-300">
-                        <Image
-                            src="/logo/opensealogo.png"
-                            alt="X"
-                            width={100}
-                            height={100}
-                                    className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] md:w-[100px] md:h-[100px]"
+                                    className="w-full h-full "
                         />
                     </a>
                 </div>
