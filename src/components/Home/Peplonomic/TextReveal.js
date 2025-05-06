@@ -1,22 +1,35 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './TextReveal.css'
 
+// Register plugins outside of component
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const TextReveal = () => {
+  const scrollTriggersRef = useRef([]);
+  
+  // Function to safely clear ScrollTrigger instances
+  const clearScrollTriggers = () => {
+    if (scrollTriggersRef.current.length) {
+      scrollTriggersRef.current.forEach(trigger => {
+        if (trigger && trigger.kill) {
+          trigger.kill();
+        }
+      });
+      scrollTriggersRef.current = [];
+    }
+  };
+  
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     // Check if animations timeline is supported
     if (!CSS.supports('animation-timeline: scroll()')) {
-      // Register the ScrollTrigger plugin
-      gsap.registerPlugin(ScrollTrigger);
-
-      const scrub = 0.5;
-      const trigger = '.reveal-section';
-      
       // Set initial state
       gsap.set('.text-reveal-wrapper p > span', {
         '--progress': 0,
@@ -24,35 +37,73 @@ const TextReveal = () => {
         color: 'transparent',
       });
 
-      // Animate the background position
-      gsap.to('.text-reveal-wrapper p > span', {
-        '--progress': 1,
-        scrollTrigger: {
-          trigger,
-          scrub,
-          start: 'top top',
-          end: 'top top-=75%'
+      const scrub = 0.5;
+      const trigger = '.reveal-section';
+      
+      // Delay initialization slightly to ensure DOM is ready
+      const initTimeout = setTimeout(() => {
+        // Animate the background position
+        const bgTween = gsap.to('.text-reveal-wrapper p > span', {
+          '--progress': 1,
+          scrollTrigger: {
+            trigger,
+            scrub,
+            start: 'top top',
+            end: 'top top-=75%',
+            invalidateOnRefresh: true,
+            id: 'bgTween'
+          }
+        });
+        
+        if (bgTween.scrollTrigger) {
+          scrollTriggersRef.current.push(bgTween.scrollTrigger);
         }
-      })
 
-      // Animate the text color
-      gsap.to('.text-reveal-wrapper p > span', {
-        color: 'black',
-        scrollTrigger: {
-          trigger,
-          scrub,
-          start: 'top top-=75%',
-          end: 'bottom bottom'
+        // Animate the text color
+        const colorTween = gsap.to('.text-reveal-wrapper p > span', {
+          color: 'black',
+          scrollTrigger: {
+            trigger,
+            scrub,
+            start: 'top top-=75%',
+            end: 'bottom bottom',
+            invalidateOnRefresh: true,
+            id: 'colorTween'
+          }
+        });
+        
+        if (colorTween.scrollTrigger) {
+          scrollTriggersRef.current.push(colorTween.scrollTrigger);
         }
-      })
+        
+        // Add resize handling
+        let resizeTimer;
+        const handleResize = () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            ScrollTrigger.refresh();
+          }, 100);
+        };
+        
+        window.addEventListener('resize', handleResize);
+        
+        // Force a refresh to ensure proper initialization
+        ScrollTrigger.refresh();
+        
+        return () => {
+          window.removeEventListener('resize', handleResize);
+          clearTimeout(resizeTimer);
+        };
+      }, 100);
+      
+      return () => {
+        clearTimeout(initTimeout);
+        clearScrollTriggers();
+      };
     }
 
     return () => {
-      // Clean up ScrollTrigger when component unmounts
-      if (typeof window !== 'undefined' && gsap.registerPlugin) {
-        const triggers = ScrollTrigger.getAll();
-        triggers.forEach(trigger => trigger.kill());
-      }
+      clearScrollTriggers();
     };
   }, []);
 

@@ -31,7 +31,6 @@
 }
 
 .text-reveal-wrapper p {
-  resize: both;
   max-width: 90vw;
   overflow: hidden;
   padding: 4ch;

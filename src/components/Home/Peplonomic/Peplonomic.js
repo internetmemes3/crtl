@@ -17,13 +17,13 @@ const Peplonomic = () => {
   const slides = [
     { 
       id: 1, 
-      description: "TEXT.",
-      videoSrc: "/videos/peplodrive.mp4", 
+      description: "Peplo's rise from the trenches is a story for the ages. The cartel kingpin went from moving grams to kilomemes while dodging the NPC DEA, dealing with jeets and pump and dumpers. Many tried to duplicate his swagger but they all come up short against the king. There is only one Peplo Escobar. Remember the name.",
+      videoSrc: "/videos/iampeploescobar.mp4", 
     },
     { 
       id: 2, 
-      description: "text",
-      videoSrc: "/videos/iampeploescobar.mp4", 
+      description: "The Don stayed locked in and formed the Based Cartel to unify base bosses and traffic product all over the world. While building in silence Peplo recruited the best of the best knowing his return would bring the fresh product the crypto world needs, he was one step closer to total domination.",
+      videoSrc: "/videos/peplodrive.mp4", 
     },
     // Add more slides as needed
   ];
@@ -58,10 +58,19 @@ const Peplonomic = () => {
   }, [currentSlideIndex]); // Re-run when slide index changes
 
   const faqs = [
-    { question: "How do I use the $CRTL Swarm?", answer: "Project timelines vary, but most are completed within 2-6 weeks, depending on complexity." },
-    { question: "Do you offer custom solutions?", answer: "Yes, contact us for more details." },
-    { question: "What industries do you work with?", answer: "We work across various industries in the AI and DeFi space." },
-    { question: "What is your pricing model?", answer: "Our pricing is project-based. Please reach out for a quote." },
+    { question: "What is MemeFAi?", answer: "MemeFAi is a term we coined for what we feel is a new sector in crypto combining Memes, DeFi and AI. $CRTL is a prime example with the deep lore and story but also tied to utility with an AI swarm that makes navigating blockchains easy for everyone." },
+    { 
+      question: "Why is $PEPLO relaunching as $CRTL?", 
+      answer: (
+        <>
+          Several reasons. As builders we wanted to do more than just speculation through memes, we wanted to bring utility we find useful while also being on the cutting edge. The PEPLO brand was a bit splintered with the Based Cartel NFTs functioning separately and we thought it would be great to bring a new product to market while also uniting the fragmented parts of the PEPLO universe under one banner, $CRTL
+          <br />
+          <br />
+          Additionally as a team running a meme project, funding to keep development ongoing can be difficult. We found new technology like v4 Hooks can help us with sustainability in the long term. So with a new product built from the ground up we thought launching with this new technology could help in having a long term solution to keep the development going.
+        </>
+      )
+    },
+    { question: "What can the $CRTL swarm do?", answer: "Besides the chat bot type features displayed on socials. The swarm’s sicarios (bots) also keep tabs on new projects, alpha and market sentiment to keep you informed when making trading decisions. Our terminal is being built from the ground up to offer a premium trading experience that can assist you with simple tasks from swaps and bridging to portfolio management insight, leverage trading, alpha on new launches and deploying tokens." },
   ];
 
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -156,17 +165,18 @@ const Peplonomic = () => {
                 {faqs.map((faq, index) => (
                   <div 
                     key={index} 
-                    className={`border-b border-black transition-colors duration-300 ease-in-out ${openFAQ === index ? 'bg-black text-white' : 'bg-white text-black'}`}
+                    className={`border-b border-black transition-colors duration-300 ease-in-out`}
                   >
                     <button
                       onClick={() => toggleFAQ(index)}
                       className="flex justify-between items-center w-full text-left py-3 md:py-4 px-4"
                     >
-                      <span className="text-base md:text-lg font-medium mr-4">{faq.question}</span>
-                      {/* Icon Container */}
-                      <div className={`flex-shrink-0 flex items-center justify-center h-6 w-6 md:h-8 md:w-8 border border-black ${openFAQ === index ? 'bg-white' : 'bg-black'}`}>
-                        <span className={`text-lg md:text-xl font-bold ${openFAQ === index ? 'text-black' : 'text-white'}`}>
-                          {openFAQ === index ? '×' : '+'}
+                      <span className="text-base md:text-lg font-medium mr-4 text-black">{faq.question}</span>
+                      {/* Icon Container - Just the icon with no background */}
+                      <div className="flex-shrink-0 flex items-center justify-center w-6 h-6 md:w-8 md:h-8">
+                        <span className={`text-black text-lg md:text-xl font-bold transition-transform duration-300 ${openFAQ === index ? 'rotate-45' : ''}`}>
+                          {/* Using + that rotates to become an X */}
+                          +
                         </span>
                       </div>
                     </button>
@@ -174,7 +184,7 @@ const Peplonomic = () => {
                     <div 
                       className={`overflow-hidden transition-all duration-500 ease-in-out ${openFAQ === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
                     >
-                      <div className="pb-4 pt-1 px-4 text-sm md:text-base">
+                      <div className="pb-4 pt-1 px-4 text-sm md:text-base text-black">
                         {faq.answer}
                       </div>
                     </div>
