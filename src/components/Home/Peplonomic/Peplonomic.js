@@ -130,7 +130,7 @@ const Peplonomic = () => {
             </div>
             
 
-            <div className="w-full lg:w-1/2 relative order-1 lg:order-2 mb-20">
+            <div className="w-full lg:w-1/2 relative order-1 lg:order-2 mb-40">
               <div className="rounded-lg overflow-hidden aspect-w-16 aspect-h-9"> 
                 <video
                   ref={videoRef}
