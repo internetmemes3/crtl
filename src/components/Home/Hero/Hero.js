@@ -140,7 +140,21 @@ const Hero = () => {
           isMobile ? 'pt-20 pb-8' : 'pt-40 pb-16'
         }`}
       >
-        <PowderText text="Cartel Over Cabal" />
+        {isMobile ? (
+          <div className="w-full px-4">
+            <Image
+              src="/cartel/crtl.jpg"
+              alt="CRTL"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto object-contain"
+              priority={true}
+            />
+          </div>
+        ) : (
+          <PowderText text="Cartel Over Cabal" />
+        )}
       </div>
       <div ref={dividerRef} className="relative w-full">
         <Image
