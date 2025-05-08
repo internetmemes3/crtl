@@ -70,7 +70,7 @@ const Peplonomic = () => {
         </>
       )
     },
-    { question: "What can the $CRTL swarm do?", answer: "Besides the chat bot type features displayed on socials. The swarm’s sicarios (bots) also keep tabs on new projects, alpha and market sentiment to keep you informed when making trading decisions. Our terminal is being built from the ground up to offer a premium trading experience that can assist you with simple tasks from swaps and bridging to portfolio management insight, leverage trading, alpha on new launches and deploying tokens." },
+    { question: "I am a $PEPLO holder, where can I claim my $CRTL?", answer: "https://claim.crtl.life/" },
     { 
       question: "What are the $CRTL tokenomics?", 
       answer: (
@@ -91,7 +91,7 @@ const Peplonomic = () => {
         </div>
       )
     },
-    { question: "I am a $PEPLO holder, where can I claim my $CRTL?", answer: "https://claim.crtl.life/" },
+    { question: "What can the $CRTL swarm do?", answer: "Besides the chat bot type features displayed on socials. The swarm’s sicarios (bots) also keep tabs on new projects, alpha and market sentiment to keep you informed when making trading decisions. Our terminal is being built from the ground up to offer a premium trading experience that can assist you with simple tasks from swaps and bridging to portfolio management insight, leverage trading, alpha on new launches and deploying tokens." },
   ];
 
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -174,7 +174,7 @@ const Peplonomic = () => {
         </div>
         
         {/* FAQ Section */}
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 px-0 sm:px-4 md:px-8 lg:px-16 mt-16 md:mt-24 font-sans mb-40 ">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 px-0 sm:px-4 md:px-8 lg:px-16 mt-16 md:mt-24 font-sans mb-60 ">
             <div className="w-full md:w-1/3">
                 {/* FAQ Title */}
                 <div className="inline-block bg-black text-white px-4 py-2 mb-4">
