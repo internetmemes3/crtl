@@ -82,19 +82,19 @@ const Cocainenomics = () => {
     useLayoutEffect(() => {
         // Clear any existing ScrollTrigger instances first
         clearScrollTriggers();
-        
+            
         if (!sectionRef.current || !verifyRef.current || !verifyContainerRef.current || dividerHeight <= 0) {
             return;
         }
         
         // Delay initialization slightly to ensure DOM is ready
         const initTimeout = setTimeout(() => {
-            const section = sectionRef.current;
-            const verify = verifyRef.current;
+                const section = sectionRef.current;
+                const verify = verifyRef.current;
             const verifyContainer = verifyContainerRef.current;
-            
+                
             // Set initial position of the Verify component
-            gsap.set(verify, { 
+                gsap.set(verify, { 
                 y: '-17%',
             });
             
@@ -120,8 +120,8 @@ const Cocainenomics = () => {
                         }
                     }
                 }
-            });
-            
+                });
+                
             // Add the ScrollTrigger to our ref for cleanup
             if (scrollTl.scrollTrigger) {
                 scrollTriggersRef.current.push(scrollTl.scrollTrigger);
@@ -178,8 +178,8 @@ const Cocainenomics = () => {
             // Force a refresh after initialization to ensure accurate positioning
             ScrollTrigger.refresh();
         }, 100); // Short delay to ensure DOM is ready
-        
-        return () => {
+                
+                return () => {
             clearTimeout(initTimeout);
             clearScrollTriggers();
         };
@@ -189,24 +189,24 @@ const Cocainenomics = () => {
     useEffect(() => {
         return () => {
             clearScrollTriggers();
-        };
+                };
     }, []);
     
     return (
         <div id="cocainenomics" ref={sectionRef} className="bg-black h-full w-full">
             {/* Divider with high z-index to stay above Verify */}
             <div ref={dividerRef} className="relative w-full z-20 sticky top-0 left-0 right-0">
-                <Image
-                    src="/divider/powerwhitedividerbottom.png"
-                    alt="Divider"
-                    width={0} 
-                    height={0} 
-                    sizes="100vw" 
-                    className="w-full h-auto object-top"
-                    quality={100}
+                    <Image
+                        src="/divider/powerwhitedividerbottom.png"
+                        alt="Divider"
+                        width={0} 
+                        height={0} 
+                        sizes="100vw" 
+                        className="w-full h-auto object-top"
+                        quality={100}
                     priority={true} // Load this image with high priority
-                />
-            </div>
+                    />
+                </div>
             
             {/* Container for Verify with overflow hidden */}
             <div 
@@ -215,14 +215,14 @@ const Cocainenomics = () => {
                 style={{ marginTop: `-${dividerHeight * 0.9}px` }} // Negative margin to allow overlap
             >
                 {/* Verify component - This will be revealed */}
-                <div 
+                <div id="terminal-section"
                     ref={verifyRef} 
                     className={`${styles.fadeBottom} relative w-full z-10 overflow-hidden`}
                 >
                     <Verify />
                 </div>
             </div>
-        </div>
+            </div>
     );
 }
 

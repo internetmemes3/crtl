@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Arcade = () => {
 
-  const socials = ['Twitter', 'Farcaster', 'Telegram', 'Instagram'];
+  const socials = ['Twitter', 'Farcaster', 'Telegram'];
   const info = ['Coinmarketcap', 'Coingecko', 'Dexscreener', 'Uniswap', 'OKX Wallet', 'Flooz'];
   const links = ['Terminal', 'Based Cartel'];
 

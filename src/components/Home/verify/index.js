@@ -120,7 +120,7 @@ export default function VerifyPage() {
           <button 
             className="connect-button"
             onClick={handleConnect}
-            disabled={connecting}
+            disabled
           >
             {connecting ? 'Connecting...' : '$ ./connect_base.sh'}
           </button>

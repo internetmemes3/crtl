@@ -41,10 +41,10 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { name: 'About', to: 'about-section' },
-    { name: 'FAQ', to: 'faq-section' },
+    { name: 'About', to: 'text-reveal-wrapper' },
+    { name: 'FAQ', to: 'peplonomic-faq' },
     { name: 'Terminal', to: 'terminal-section' },
-    { name: 'NFTs', to: 'nfts-section' },
+    { name: 'NFTs', to: 'based' },
   ];
 
   return (
@@ -78,14 +78,14 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-
+          {/*
           <button 
             onClick={() => setShowIframe(true)}
             className="hidden md:block bg-gray-600 hover:bg-gray-500 text-white px-5 py-2 rounded-full uppercase text-sm tracking-wider"
           >
             Buy Now
           </button>
-
+          */}
           {/* Hamburger Menu Button - Mobile Only */}
           <button 
             className="md:hidden flex flex-col space-y-1.5 p-2 z-50" 
@@ -121,6 +121,7 @@ const Navbar = () => {
               </li>
             ))}
             <li className="pt-2">
+               {/*
               <button 
                 onClick={() => {
                   setShowIframe(true);
@@ -130,6 +131,7 @@ const Navbar = () => {
               >
                 Buy Now
               </button>
+              */}
             </li>
           </ul>
         </div>

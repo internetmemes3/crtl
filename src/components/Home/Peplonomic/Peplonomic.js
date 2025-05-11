@@ -25,6 +25,11 @@ const Peplonomic = () => {
       description: "The Don stayed locked in and formed the Based Cartel to unify base bosses and traffic product all over the world. While building in silence Peplo recruited the best of the best knowing his return would bring the fresh product the crypto world needs, he was one step closer to total domination.",
       videoSrc: "/videos/peplodrive.mp4", 
     },
+    { 
+      id: 2, 
+      description: "After being off the radar for some time, Peplo finds himself surrounded by the NPC DEA. Is this the end of the Don or the beginning of something new",
+      videoSrc: "/videos/IMbackmofo.mp4", 
+    },
     // Add more slides as needed
   ];
 
@@ -174,7 +179,7 @@ const Peplonomic = () => {
         </div>
         
         {/* FAQ Section */}
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 px-0 sm:px-4 md:px-8 lg:px-16 mt-16 md:mt-24 font-sans mb-60 ">
+        <div id="peplonomic-faq" className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 px-0 sm:px-4 md:px-8 lg:px-16 mt-16 md:mt-24 font-sans mb-60 ">
             <div className="w-full md:w-1/3">
                 {/* FAQ Title */}
                 <div className="inline-block bg-black text-white px-4 py-2 mb-4">

@@ -42,34 +42,34 @@ const TextReveal = () => {
       
       // Delay initialization slightly to ensure DOM is ready
       const initTimeout = setTimeout(() => {
-        // Animate the background position
+      // Animate the background position
         const bgTween = gsap.to('.text-reveal-wrapper p > span', {
-          '--progress': 1,
-          scrollTrigger: {
-            trigger,
-            scrub,
-            start: 'top top',
+        '--progress': 1,
+        scrollTrigger: {
+          trigger,
+          scrub,
+          start: 'top top',
             end: 'top top-=75%',
             invalidateOnRefresh: true,
             id: 'bgTween'
-          }
+        }
         });
         
         if (bgTween.scrollTrigger) {
           scrollTriggersRef.current.push(bgTween.scrollTrigger);
         }
 
-        // Animate the text color
+      // Animate the text color
         const colorTween = gsap.to('.text-reveal-wrapper p > span', {
-          color: 'black',
-          scrollTrigger: {
-            trigger,
-            scrub,
-            start: 'top top-=75%',
+        color: 'black',
+        scrollTrigger: {
+          trigger,
+          scrub,
+          start: 'top top-=75%',
             end: 'bottom bottom',
             invalidateOnRefresh: true,
             id: 'colorTween'
-          }
+        }
         });
         
         if (colorTween.scrollTrigger) {

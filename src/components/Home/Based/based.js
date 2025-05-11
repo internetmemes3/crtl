@@ -164,7 +164,7 @@ const Based = () => {
     }, []);
 
     return (
-        <div className="bg-black h-full w-full">
+        <div className="bg-black h-full w-full" id='based' >
             {/* Logo Section - Responsive */}
             <div className="flex items-center justify-center pt-10 sm:pt-16 md:pt-20 px-4">
                     <Image
