@@ -28,7 +28,7 @@ export default function BootPage() {
   const hasNavigated = useRef(false);
 
   useEffect(() => {
-    // Cursor blinking effect
+   
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
     }, 500);

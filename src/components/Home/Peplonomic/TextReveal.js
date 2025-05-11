@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './TextReveal.css'
 
-// Register plugins outside of component
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 const TextReveal = () => {
   const scrollTriggersRef = useRef([]);
   
-  // Function to safely clear ScrollTrigger instances
+ 
   const clearScrollTriggers = () => {
     if (scrollTriggersRef.current.length) {
       scrollTriggersRef.current.forEach(trigger => {
@@ -28,9 +28,9 @@ const TextReveal = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Check if animations timeline is supported
+    
     if (!CSS.supports('animation-timeline: scroll()')) {
-      // Set initial state
+      
       gsap.set('.text-reveal-wrapper p > span', {
         '--progress': 0,
         backgroundPositionX: 'calc(-200vmax + (var(--progress) * 200vmax)), calc(-200vmax + (var(--progress) * 200vmax)), 0',
@@ -40,9 +40,9 @@ const TextReveal = () => {
       const scrub = 0.5;
       const trigger = '.reveal-section';
       
-      // Delay initialization slightly to ensure DOM is ready
+      
       const initTimeout = setTimeout(() => {
-      // Animate the background position
+      
         const bgTween = gsap.to('.text-reveal-wrapper p > span', {
         '--progress': 1,
         scrollTrigger: {
@@ -59,7 +59,7 @@ const TextReveal = () => {
           scrollTriggersRef.current.push(bgTween.scrollTrigger);
         }
 
-      // Animate the text color
+      
         const colorTween = gsap.to('.text-reveal-wrapper p > span', {
         color: 'black',
         scrollTrigger: {
@@ -76,7 +76,7 @@ const TextReveal = () => {
           scrollTriggersRef.current.push(colorTween.scrollTrigger);
         }
         
-        // Add resize handling
+     
         let resizeTimer;
         const handleResize = () => {
           clearTimeout(resizeTimer);
@@ -87,7 +87,7 @@ const TextReveal = () => {
         
         window.addEventListener('resize', handleResize);
         
-        // Force a refresh to ensure proper initialization
+        
         ScrollTrigger.refresh();
         
         return () => {

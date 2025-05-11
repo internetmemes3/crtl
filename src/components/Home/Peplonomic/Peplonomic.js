@@ -7,7 +7,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const Peplonomic = () => {
-  // Register ScrollTrigger with GSAP
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
@@ -30,7 +30,7 @@ const Peplonomic = () => {
       description: "After being off the radar for some time, Peplo finds himself surrounded by the NPC DEA. Is this the end of the Don or the beginning of something new",
       videoSrc: "/videos/IMbackmofo.mp4", 
     },
-    // Add more slides as needed
+   
   ];
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -50,17 +50,17 @@ const Peplonomic = () => {
     );
   };
   
-  // Handle video source change
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.src = slides[currentSlideIndex].videoSrc;
-      videoRef.current.load(); // Important to load the new source
+      videoRef.current.load(); 
       videoRef.current.play().catch(error => {
-        // Autoplay might be blocked, which is fine. User can click play.
+        
         console.log("Autoplay prevented or failed:", error);
       });
     }
-  }, [currentSlideIndex]); // Re-run when slide index changes
+  }, [currentSlideIndex]); 
 
   const faqs = [
     { question: "What is MemeFAi?", answer: "MemeFAi is a term we coined for what we feel is a new sector in crypto combining Memes, DeFi and AI. $CRTL is a prime example with the deep lore and story but also tied to utility with an AI swarm that makes navigating blockchains easy for everyone." },
@@ -108,31 +108,31 @@ const Peplonomic = () => {
     return (
     <div id="peplonomic" className="bg-white text-black py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Text Reveal Section - Ensure TextReveal itself is responsive */}
+        
         <div className="mb-12 md:mb-16">
           <TextReveal />
         </div>
 
-        {/* Slider Section */}
+       
         <div className="mb-16 md:mb-20">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
             
-            {/* Left Content - Text and Controls */}
+            
             <div className="w-full lg:w-1/2 flex flex-col order-2 lg:order-1">
              
-              {/* Slide Counter */}
+           
               <div className="text-3xl md:text-4xl font-bold mb-6 md:mb-8">
                 {currentSlideIndex + 1}/{totalSlides}
               </div>
               
-              {/* Slide Description */}
-              <div className="mb-6 md:mb-8 font-mono min-h-[100px] md:min-h-[120px]"> {/* Added min-height */} 
+              
+              <div className="mb-6 md:mb-8 font-mono min-h-[100px] md:min-h-[120px]"> 
                 <p className="text-base md:text-lg leading-relaxed">
                   {slides[currentSlideIndex].description}
                 </p>
               </div>
               
-              {/* Navigation Controls */}
+             
               <div className="flex items-center space-x-3 pt-4">
                 <button 
                   onClick={goToPrevSlide}
@@ -178,10 +178,10 @@ const Peplonomic = () => {
           </div>
         </div>
         
-        {/* FAQ Section */}
+       
         <div id="peplonomic-faq" className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 px-0 sm:px-4 md:px-8 lg:px-16 mt-16 md:mt-24 font-sans mb-60 ">
             <div className="w-full md:w-1/3">
-                {/* FAQ Title */}
+                
                 <div className="inline-block bg-black text-white px-4 py-2 mb-4">
                   <h2 className="text-3xl md:text-4xl font-bold">FAQ</h2>
                 </div>
@@ -198,15 +198,15 @@ const Peplonomic = () => {
                       className="flex justify-between items-center w-full text-left py-3 md:py-4 px-4"
                     >
                       <span className="text-base md:text-lg font-medium mr-4 text-black">{faq.question}</span>
-                      {/* Icon Container - Just the icon with no background */}
+                      
                       <div className="flex-shrink-0 flex items-center justify-center w-6 h-6 md:w-8 md:h-8">
                         <span className={`text-black text-lg md:text-xl font-bold transition-transform duration-300 ${openFAQ === index ? 'rotate-45' : ''}`}>
-                          {/* Using + that rotates to become an X */}
+                          
                           +
                         </span>
                       </div>
                     </button>
-                    {/* Answer Section */}
+                   
                     <div 
                       className={`overflow-hidden transition-all duration-500 ease-in-out ${openFAQ === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
                     >

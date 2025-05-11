@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const Logo = () => {
-    // Define logos data to make the code more maintainable
+    
     const logos = [
         {
             href: "https://coinmarketcap.com/currencies/peplo-escobar/",
@@ -49,18 +49,18 @@ const Logo = () => {
         },
     ];
 
-    // Clone logos to create a seamless scrolling effect
+    
     const logosForScroll = [...logos, ...logos];
 
     return (
         <div className="bg-white py-8 overflow-hidden relative">
-            {/* Left fade mask */}
+            
             <div className="absolute left-0 top-0 w-32 h-full z-10 bg-gradient-to-r from-white to-transparent"></div>
             
-            {/* Right fade mask */}
+            
             <div className="absolute right-0 top-0 w-32 h-full z-10 bg-gradient-to-l from-white to-transparent"></div>
             
-            {/* Scrolling carousel */}
+            
             <div className="logo-carousel-container">
                 <div className="logo-carousel">
                     {logosForScroll.map((logo, index) => (

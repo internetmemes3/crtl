@@ -17,7 +17,7 @@ const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
   const scrollTriggersRef = useRef([]);
   
-  // Function to safely clear ScrollTrigger instances
+  
   const clearScrollTriggers = () => {
     if (scrollTriggersRef.current.length) {
       scrollTriggersRef.current.forEach(trigger => {
@@ -29,18 +29,18 @@ const Hero = () => {
     }
   };
   
-  // Function to check if device is mobile
+  
   const checkMobile = () => {
     if (typeof window === 'undefined') return false;
     return window.innerWidth < 768;
   };
   
-  // Set up mobile detection with resize handling
+  
   useEffect(() => {
-    // Set initial mobile status
+    
     setIsMobile(checkMobile());
     
-    // Update mobile status on resize with debounce
+    
     let resizeTimer;
     const handleResize = () => {
       clearTimeout(resizeTimer);
@@ -56,22 +56,22 @@ const Hero = () => {
     };
   }, []);
   
-  // Set up ScrollTrigger animations
+ 
   useLayoutEffect(() => {
-    // Clear existing ScrollTriggers to prevent duplicates
+    
     clearScrollTriggers();
     
     if (!containerRef.current || !powderRef.current || !dividerRef.current) {
       return;
     }
     
-    // Delay initialization slightly to ensure DOM is ready
+   
     const initTimeout = setTimeout(() => {
       const container = containerRef.current;
       const powderSection = powderRef.current;
       const divider = dividerRef.current;
       
-      // Animation timeline for fade out effect
+      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -85,19 +85,19 @@ const Hero = () => {
         }
       });
       
-      // Add fade out animation
+     
       tl.to(powderSection, {
         opacity: -0.5,
         duration: 0.5,
         ease: "power2.out"
       }, 0);
       
-      // Save the ScrollTrigger for cleanup
+      
       if (tl.scrollTrigger) {
         scrollTriggersRef.current.push(tl.scrollTrigger);
       }
       
-      // Separate timeline for divider animation
+    
       const dividerTl = gsap.timeline({
         scrollTrigger: {
           trigger: divider,
@@ -113,18 +113,18 @@ const Hero = () => {
         scrollTriggersRef.current.push(dividerTl.scrollTrigger);
       }
       
-      // Force a refresh to ensure all measurements are accurate
+      
       ScrollTrigger.refresh();
     }, 100);
     
-    // Cleanup function
+    
     return () => {
       clearTimeout(initTimeout);
       clearScrollTriggers();
     };
-  }, [isMobile]); // Re-run when mobile state changes
+  }, [isMobile]); 
   
-  // Final cleanup on component unmount
+  
   useEffect(() => {
     return () => {
       clearScrollTriggers();
@@ -133,7 +133,7 @@ const Hero = () => {
 
   return (
     <div ref={containerRef} className="relative bg-black">
-      {/* Powder Text Section - This will be pinned */}
+      
       <div 
         ref={powderRef} 
         className={`flex flex-col items-center justify-center w-full ${

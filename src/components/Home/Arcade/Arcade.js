@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-// Removed unused imports useEffect, useRef
+
 
 const Arcade = () => {
 

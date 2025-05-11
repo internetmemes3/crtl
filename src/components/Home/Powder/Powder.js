@@ -9,34 +9,34 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
   const initFuncRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   
-  // Calculate responsive dimensions based on window size
+  
   const calculateDimensions = () => {
     if (typeof window === 'undefined') return { width: 0, height: 0 };
     
     const width = window.innerWidth;
-    // Scale height based on screen width
+    
     const height = Math.min(Math.max(width * 0.2, 150), 350);
     
     return { width, height };
   };
   
-  // Calculate responsive font size based on screen width
+  
   const calculateFontSize = () => {
     if (typeof window === 'undefined') return 200;
     
     const width = window.innerWidth;
-    // Base font size on screen width
-    if (width < 480) return 60; // Mobile
-    if (width < 768) return 100; // Small tablets
-    if (width < 1024) return 150; // Tablets
-    return 200; // Desktops
+    
+    if (width < 480) return 60;
+    if (width < 768) return 100; 
+    if (width < 1024) return 150; 
+    return 200; 
   };
   
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     
-    // Set initial dimensions
+    
     const newDimensions = calculateDimensions();
     setDimensions(newDimensions);
     
@@ -74,7 +74,7 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         
         if (moveLength < 0.1) return;
 
-        const lineLength = 100; // Length of the interaction line
+        const lineLength = 100; 
         const dirX = moveY / moveLength;
         const dirY = moveX / moveLength;
   
@@ -95,15 +95,15 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
         const dy = this.y - closestY;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 10) { // Line thickness
+        if (distance < 10) { 
           this.isActivated = true;
-          setNeedsReset(true); // Set the reset state when particles are disturbed
+          setNeedsReset(true); 
           this.x += moveX * this.density * 0.5;
           this.y += moveY * this.density * 0.5;
         }
       }
 
-      // Add a method to reset the particle to its original position
+    
       reset() {
         this.x = this.originX;
         this.y = this.originY;
@@ -127,23 +127,23 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      const samplingRate = 2; // Adjust this value (e.g., 2, 3, 4)
-      const particleSize = 3; // Adjust if needed based on samplingRate
+      const samplingRate = 2; 
+      const particleSize = 3; 
 
       for (let y = 0; y < canvas.height; y += samplingRate) {
         for (let x = 0; x < canvas.width; x += samplingRate) {
           const index = (Math.floor(y) * canvas.width + Math.floor(x)) * 4;
-          if (data[index + 3] > 128) { // Check alpha channel
-            particles.push(new Particle(x, y /*, potential size argument */));
+          if (data[index + 3] > 128) { 
+            particles.push(new Particle(x, y ));
           }
         }
       }
       
-      // Store particles in the ref for later reset access
+      
       particlesRef.current = particles;
     }
 
-    // Store init function in ref for reset button
+    
     initFuncRef.current = init;
 
     const mouse = {
@@ -194,7 +194,7 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
     init();
     animate();
 
-    // Properly handle window resize
+    
     const handleResize = () => {
       const newDimensions = calculateDimensions();
       setDimensions(newDimensions);
@@ -217,9 +217,9 @@ const PowderText = ({ text = "Cartel Over Cabal" }) => {
     };
   }, [text]);
 
-  // Function to handle the reset button click
+ 
   const handleReset = () => {
-    // Reset all particles to their original positions
+    
     particlesRef.current.forEach(particle => particle.reset());
     setNeedsReset(false);
   };
